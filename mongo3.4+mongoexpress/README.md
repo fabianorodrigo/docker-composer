@@ -16,4 +16,6 @@ Port: 8081
 
 ### RUN INSTRUCTIONS ###
 
-**Start:** `sudo docker-composer up mongoexpress` >>>Unless they are already running, this command also starts linked service MongoDB.
+**Start:** ```bash 
+sudo docker-composer up mongoexpress # Unless they are already running, this command also starts linked service MongoDB.
+```
