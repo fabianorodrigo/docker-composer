@@ -10,6 +10,10 @@ Database: test
 Username: admin
 Passowrd: admin
 
-## MongoD Express ##]
+## MongoD Express ##
 
 Port: 8081
+
+### RUN INSTRUCTIONS ###
+
+**Start:** `sudo docker-composer up mongoexpress` >>>Unless they are already running, this command also starts linked service MongoDB.
