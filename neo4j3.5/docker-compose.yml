@@ -1,0 +1,18 @@
+version: '3.3'
+volumes:
+  neo4jdata:
+  neo4jlogs:
+  neo4jplugins:
+  neo4jimport:
+
+services:
+  neo4jdb:
+    image: neo4j:latest
+    ports:
+      - '7474:7474'
+      - '7687:7687'
+    volumes:
+      - neo4jdata:/data
+      - neo4jlogs:/logs
+      - neo4jplugins:/plugins
+      - neo4jimport:/import
