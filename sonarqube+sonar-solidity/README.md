@@ -10,3 +10,6 @@ Port: 9000
 ```bash
 sudo docker run -d --name sonarqube -p 9000:9000 sonarqubesonarsolidity
 ```
+
+Login User: admin
+Login Password: admin
