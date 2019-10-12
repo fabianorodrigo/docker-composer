@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  trufflev3.2:
+    container_name: trufflev3.2
+    image: trufflev3.2
+    stdin_open: true
+    tty: true
+    ports:
+      - '7001:8080'
+    volumes:
+      - ../:/code
+
+  ganache:
+    container_name: ganache
+    image: trufflesuite/ganache-cli:latest
+    command: '--seed abcd --defaultBalanceEther 100000000'
