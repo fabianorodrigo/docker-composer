@@ -4,6 +4,10 @@ FROM node:10.16
 MAINTAINER Fabiano Nascimento <fabrodrigo@hotmail.com>
 #COPY MetaCoin /home/node/MetaCoin
 
+RUN apt-get update && \
+  apt-get upgrade -y && \
+  apt-get install -y git
+
 RUN apk add --update \
   python
 
