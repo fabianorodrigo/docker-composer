@@ -8,11 +8,14 @@ RUN apt-get update && \
   apt-get upgrade -y && \
   apt-get install -y git
 
-RUN apk add --update \
-  python
+RUN apt-get update && \
+  apt-get upgrade -y && \
+  apt-get install -y python
 
-RUN npm install -g truffle@5.0.27
-RUN npm install -g ganache-cli
+RUN apt-get install sudo
+
+RUN npm install --unsafe-perm -g truffle@5.0.27
+RUN npm install --unsafe-perm -g ganache-cli
 
 # Set to a non-root built-in user `node`
 USER node
