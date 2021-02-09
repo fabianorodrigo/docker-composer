@@ -1,0 +1,38 @@
+version: '3.3'
+
+services:
+  postgresdb: #quando for acessar via pgadmin, esse é o nome do host
+    image: postgres
+    ports:
+      - '15432:5432'
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-postgres} #seta variável de ambiente POSTGRES_USER ou fica com o default
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-changeme} #seta variável de ambiente POSTGRES_PASSWORD ou fica com o default
+      - PGDATA=/var/lib/postgresql/data/main
+    volumes:
+      - postgresql:/var/lib/postgresql
+      # This needs explicit mapping due to https://github.com/docker-library/postgres/blob/4e48e3228a30763913ece952c611e5e9b95c8759/Dockerfile.template#L52
+      - ~/sgbds/postgres/:/var/lib/postgresql/data
+    networks:
+      - postgresnet
+  pgadmin:
+    image: dpage/pgadmin4:4.30
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+    ports:
+      - '${PGADMIN_PORT:-5050}:80'
+    depends_on:
+      - postgresdb
+    volumes: #sudo chown -R 5050:5050 <host_directory>
+      - ~/sgbds/postgres/pgadmin/:/root/.pgadmin
+      - ~/sgbds/postgres/pgadmin/:/var/lib/pgadmin
+    networks:
+      - postgresnet
+networks:
+  postgresnet:
+    driver: bridge
+volumes:
+  postgresql:
+  postgresql_data:
+  pgadmin:
