@@ -15,6 +15,20 @@ services:
       - ~/sgbds/postgres13/data:/var/lib/postgresql/data
     networks:
       - postgresnet
+  pgadmin:
+    image: dpage/pgadmin4:5.1
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+    ports:
+      - '${PGADMIN_PORT:-5050}:80'
+    depends_on:
+      - postgresdb
+    volumes: #sudo chown -R 5050:5050 <host_directory>
+      - ~/sgbds/postgres13/pgadmin/:/root/.pgadmin
+      - ~/sgbds/postgres13/pgadmin/:/var/lib/pgadmin
+    networks:
+      - postgresnet
 networks:
   postgresnet:
     driver: bridge
