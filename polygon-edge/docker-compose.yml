@@ -1,0 +1,68 @@
+version: '3.5'
+
+services:
+  ## RUN NODES
+  ## Nodes must have the same names as folders in genesis-legde
+  node1:
+    image: 0xpolygon/polygon-edge:latest
+    command: ["server", "--data-dir", "/data", "--chain", "/genesis/genesis.json", "--grpc-address", "0.0.0.0:9632", "--libp2p", "0.0.0.0:1478", "--jsonrpc", "0.0.0.0:8545", "--seal"]
+    ports:
+      - '10000:9632'
+      - '10002:8545'
+    volumes:
+      - ~/sgbds/polygon-edge/node-1:/data
+      - ~/sgbds/polygon-edge/genesis:/genesis
+    networks:
+      - polygon-edge-docker
+    restart: on-failure
+    
+  node2:
+    image: 0xpolygon/polygon-edge:latest
+    command: ["server", "--data-dir", "/data", "--chain", "/genesis/genesis.json", "--grpc-address", "0.0.0.0:9632", "--libp2p", "0.0.0.0:1478", "--jsonrpc", "0.0.0.0:8545", "--seal"]
+    ports:
+      - '20000:9632'
+      - '20002:8545'
+    volumes:
+      - ~/sgbds/polygon-edge/node-2:/data
+      - ~/sgbds/polygon-edge/genesis:/genesis
+    networks:
+      - polygon-edge-docker
+    restart: on-failure
+    
+  node3:
+    image: 0xpolygon/polygon-edge:latest
+    command: ["server", "--data-dir", "/data", "--chain", "/genesis/genesis.json", "--grpc-address", "0.0.0.0:9632", "--libp2p", "0.0.0.0:1478", "--jsonrpc", "0.0.0.0:8545", "--seal"]
+    ports:
+      - '30000:9632'
+      - '30002:8545'
+    volumes:
+      - ~/sgbds/polygon-edge/node-3:/data
+      - ~/sgbds/polygon-edge/genesis:/genesis
+    networks:
+      - polygon-edge-docker
+    restart: on-failure
+    
+  node4:
+    image: 0xpolygon/polygon-edge:latest
+    command: ["server", "--data-dir", "/data", "--chain", "/genesis/genesis.json", "--grpc-address", "0.0.0.0:9632", "--libp2p", "0.0.0.0:1478", "--jsonrpc", "0.0.0.0:8545", "--seal"]
+    ports:
+      - '40000:9632'
+      - '40002:8545'
+    volumes:
+      - ~/sgbds/polygon-edge/node-4:/data
+      - ~/sgbds/polygon-edge/genesis:/genesis
+    networks:
+      - polygon-edge-docker
+    restart: on-failure
+
+networks:
+  polygon-edge-docker:
+    driver: bridge
+    name: polygon-edge-docker
+
+volumes:
+  node-1:
+  node-2:
+  node-3:
+  node-4:
+  genesis:

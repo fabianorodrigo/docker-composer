@@ -1,0 +1,29 @@
+## Este docker-compose é executado uma única vez no setup do ambiente
+# para geração do genesis.json de acordo com os parâmetros passados
+
+version: '3.5'
+
+services:
+  ## INITIALIZE GENESIS
+  init:
+    image: 0xpolygon/polygon-edge:latest
+    #command: ["genesis","--dir","/genesis/genesis.json","--consensus", "ibft","--ibft-validators-prefix-path","test-chain-","--bootnode","/ip4/127.0.0.1/tcp/10001/p2p/16Uiu2HAmJxxH1tScDX2rLGSU9exnuvZKNM9SoK3v315azp68DLPW","--bootnode","/ip4/127.0.0.1/tcp/20001/p2p/16Uiu2HAmS9Nq4QAaEiogE4ieJFUYsoH28magT7wSvJPpfUGBj3Hq"]
+    command: "genesis --dir /genesis/genesis.json --consensus ibft --ibft-validators-prefix-path test-chain- --bootnode /dns4/localhost/tcp/10000/p2p/16Uiu2HAmLfDpponsfzPgB1VSpq1NWiqg2kSnd5DCLegj98xaTGfk --bootnode /dns4/localhost/tcp/20000/p2p/16Uiu2HAm5wPhhCNiGG3XESgqyPzc3Ao52TbLuu4wP2obUVNDx9Yi"
+    #image: node:16-bullseye-slim
+    #command: ["touch","/genesis/teste"]
+    volumes:
+      - ~/sgbds/polygon-edge/node-1:/polygon-edge/data-1
+      - ~/sgbds/polygon-edge/node-2:/polygon-edge/data-2
+      - ~/sgbds/polygon-edge/node-3:/polygon-edge/data-3
+      - ~/sgbds/polygon-edge/node-4:/polygon-edge/data-4
+      - ~/sgbds/polygon-edge/genesis:/genesis
+    networks:
+      - polygon-edge-docker
+  
+networks:
+  polygon-edge-docker:
+    driver: bridge
+    name: polygon-edge-docker
+
+volumes:
+  genesis:
